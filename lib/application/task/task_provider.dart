@@ -11,11 +11,16 @@ class TaskNotifier extends StateNotifier<List<Task>> {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
 
+  List<Task> _allTasks = [];
+  TaskPriority? _priorityFilter;
+  bool? _statusFilter;
+  DateTime? _dateFilter;
+
   TaskNotifier() : super([]) {
     _loadTasks();
   }
 
-  Future<void> _loadTasks() async {
+  void _loadTasks() async {
     final user = _auth.currentUser;
     if (user == null) return;
 
@@ -24,11 +29,44 @@ class TaskNotifier extends StateNotifier<List<Task>> {
         .where('userId', isEqualTo: user.uid)
         .snapshots()
         .listen((snapshot) {
-          state =
+          _allTasks =
               snapshot.docs
                   .map((doc) => Task.fromMap(doc.data(), doc.id))
                   .toList();
+          _applyFilters();
         });
+  }
+
+  void _applyFilters() {
+    var filteredTasks = List<Task>.from(_allTasks);
+
+    if (_priorityFilter != null) {
+      filteredTasks =
+          filteredTasks
+              .where((task) => task.priority == _priorityFilter)
+              .toList();
+    }
+
+    if (_statusFilter != null) {
+      filteredTasks =
+          filteredTasks
+              .where((task) => task.isCompleted == _statusFilter)
+              .toList();
+    }
+
+    if (_dateFilter != null) {
+      filteredTasks =
+          filteredTasks
+              .where(
+                (task) =>
+                    task.dueDate.year == _dateFilter!.year &&
+                    task.dueDate.month == _dateFilter!.month &&
+                    task.dueDate.day == _dateFilter!.day,
+              )
+              .toList();
+    }
+
+    state = filteredTasks;
   }
 
   Future<void> addTask(
@@ -69,5 +107,19 @@ class TaskNotifier extends StateNotifier<List<Task>> {
       print('Error toggling task completion: $e');
     }
     // await updateTask(task);
+  }
+
+  void setFilters({TaskPriority? priority, bool? status, DateTime? date}) {
+    _priorityFilter = priority;
+    _statusFilter = status;
+    _dateFilter = date;
+    _applyFilters();
+  }
+
+  void clearFilters() {
+    _priorityFilter = null;
+    _statusFilter = null;
+    _dateFilter = null;
+    state = _allTasks;
   }
 }

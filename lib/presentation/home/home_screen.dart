@@ -16,6 +16,10 @@ class HomeScreen extends ConsumerWidget {
         title: const Text('My Tasks'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.filter_list),
+            onPressed: () => _showFilterDialog(context, ref),
+          ),
+          IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () => ref.read(authProvider.notifier).signOut(),
           ),
@@ -147,6 +151,94 @@ class HomeScreen extends ConsumerWidget {
                   }
                 },
                 child: const Text('Add'),
+              ),
+            ],
+          ),
+    );
+  }
+
+  Future<void> _showFilterDialog(BuildContext context, WidgetRef ref) async {
+    TaskPriority? selectedPriority;
+    bool? selectedStatus;
+    DateTime? selectedDate;
+
+    await showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Filter Tasks'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                DropdownButtonFormField<TaskPriority>(
+                  value: selectedPriority,
+                  decoration: const InputDecoration(labelText: 'Priority'),
+                  items: [
+                    const DropdownMenuItem(
+                      value: null,
+                      child: Text('All Priorities'),
+                    ),
+                    ...TaskPriority.values.map(
+                      (p) => DropdownMenuItem(
+                        value: p,
+                        child: Text(p.toString().split('.').last.toUpperCase()),
+                      ),
+                    ),
+                  ],
+                  onChanged: (value) => selectedPriority = value,
+                ),
+                DropdownButtonFormField<bool>(
+                  value: selectedStatus,
+                  decoration: const InputDecoration(labelText: 'Status'),
+                  items: const [
+                    DropdownMenuItem(value: null, child: Text('All Status')),
+                    DropdownMenuItem(value: true, child: Text('Completed')),
+                    DropdownMenuItem(value: false, child: Text('Pending')),
+                  ],
+                  onChanged: (value) => selectedStatus = value,
+                ),
+                ListTile(
+                  title: const Text('Due Date'),
+                  trailing:
+                      selectedDate != null
+                          ? Text(
+                            '${selectedDate?.day}/${selectedDate?.month}/${selectedDate?.year}',
+                          )
+                          : const Text('Select Date'),
+                  onTap: () async {
+                    final date = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100),
+                    );
+                    if (date != null) {
+                      selectedDate = date;
+                    }
+                  },
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  ref.read(taskProvider.notifier).clearFilters();
+                  Navigator.pop(context);
+                },
+                child: const Text('Clear Filters'),
+              ),
+              TextButton(
+                onPressed: () {
+                  ref
+                      .read(taskProvider.notifier)
+                      .setFilters(
+                        priority: selectedPriority,
+                        status: selectedStatus,
+                        date: selectedDate,
+                      );
+                  Navigator.pop(context);
+                },
+                child: const Text('Apply'),
               ),
             ],
           ),
