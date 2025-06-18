@@ -131,14 +131,17 @@ class HomeScreen extends ConsumerWidget {
         height: 64,
         child: FloatingActionButton(
           onPressed: () => _showAddTaskDialog(context, ref),
-          elevation: 8,
+          elevation: 0, // Remove elevation since we have custom shadow
           backgroundColor: const Color.fromARGB(255, 136, 140, 244),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(32.0)),
+          ),
           child: const Icon(Icons.add, size: 32, color: Colors.white),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-        color: Colors.grey.shade200,
+        color: Color(0xFFF8F9FA),
         height: 80,
         notchMargin: 8,
         shape: const CircularNotchedRectangle(),
