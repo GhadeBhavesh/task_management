@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../application/task/task_provider.dart';
 import '../../domain/model/task.dart';
-import '../../application/auth/auth_provider.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -18,23 +17,15 @@ class HomeScreen extends ConsumerWidget {
           // Custom Header with Purple Gradient
           Container(
             decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Color(0xFF6B73FF), Color(0xFF9B59B6)],
-              ),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(30),
-                bottomRight: Radius.circular(30),
-              ),
+              color: Color.fromARGB(255, 136, 140, 244),
             ),
             child: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 25),
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Top Row with Menu and Actions
+                    // Top Row with Menu and More Options
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -50,76 +41,38 @@ class HomeScreen extends ConsumerWidget {
                             size: 20,
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 80,
-                                vertical: 15,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                              child: const Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Icon(
-                                    Icons.search,
-                                    color: Colors.black,
-                                    size: 20,
-                                  ),
-                                  SizedBox(width: 12),
-                                  Text(
-                                    'Search',
-                                    style: TextStyle(
-                                      color: Colors.white70,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.15),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Icon(
-                                Icons.filter_list,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            // GestureDetector(
-                            //   onTap:
-                            //       () =>
-                            //           ref.read(authProvider.notifier).signOut(),
-                            //   child: Container(
-                            //     padding: const EdgeInsets.all(8),
-                            //     decoration: BoxDecoration(
-                            //       color: Colors.white.withOpacity(0.15),
-                            //       borderRadius: BorderRadius.circular(10),
-                            //     ),
-                            //     child: const Icon(
-                            //       Icons.more_horiz,
-                            //       color: Colors.white,
-                            //       size: 20,
-                            //     ),
-                            //   ),
-                            // ),
-                          ],
+                        // Search Bar
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 70,
+                            vertical: 8,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Icon(
+                            Icons.search,
+                            color: Colors.grey.shade600,
+                            size: 20,
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.15),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Icon(
+                            Icons.more_horiz,
+                            color: Colors.white,
+                            size: 20,
+                          ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 25),
 
-                    // Search Bar
-                    const SizedBox(height: 25),
                     // Date and Title
                     Text(
                       _getCurrentDateString(),
@@ -162,9 +115,7 @@ class HomeScreen extends ConsumerWidget {
       ),
       floatingActionButton: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF6B73FF), Color(0xFF9B59B6)],
-          ),
+          color: Color.fromARGB(255, 136, 140, 244),
           shape: BoxShape.circle,
         ),
         child: FloatingActionButton(
@@ -273,16 +224,13 @@ class HomeScreen extends ConsumerWidget {
       background: Container(
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        decoration: BoxDecoration(
-          // color: Colors.red.shade400,
-          borderRadius: BorderRadius.circular(20),
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
         alignment: Alignment.centerRight,
         child: Container(
-          width: 30,
-          height: 30,
+          width: 40,
+          height: 40,
           decoration: BoxDecoration(
-            color: Colors.redAccent,
+            color: Colors.red,
             borderRadius: BorderRadius.circular(15),
           ),
           child: const Icon(
@@ -334,93 +282,102 @@ class HomeScreen extends ConsumerWidget {
           ),
         );
       },
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 12),
-        padding: const EdgeInsets.all(18),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.04),
-              blurRadius: 15,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            // Checkbox
-            GestureDetector(
-              onTap:
-                  () => ref
-                      .read(taskProvider.notifier)
-                      .toggleTaskCompletion(task),
-              child: Container(
-                width: 24,
-                height: 24,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
+      child: GestureDetector(
+        onTap: () => _showAddTaskDialog(context, ref, task),
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 12),
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.04),
+                blurRadius: 15,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              // Checkbox
+              GestureDetector(
+                onTap:
+                    () => ref
+                        .read(taskProvider.notifier)
+                        .toggleTaskCompletion(task),
+                child: Container(
+                  width: 24,
+                  height: 24,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color:
+                          task.isCompleted
+                              ? _getPriorityColor(task.priority)
+                              : Colors.grey.shade300,
+                      width: 2,
+                    ),
                     color:
                         task.isCompleted
                             ? _getPriorityColor(task.priority)
-                            : Colors.grey.shade300,
-                    width: 2,
+                            : Colors.transparent,
                   ),
-                  color:
+                  child:
                       task.isCompleted
-                          ? _getPriorityColor(task.priority)
-                          : Colors.transparent,
+                          ? const Icon(
+                            Icons.check,
+                            size: 14,
+                            color: Colors.white,
+                          )
+                          : null,
                 ),
-                child:
-                    task.isCompleted
-                        ? const Icon(Icons.check, size: 14, color: Colors.white)
-                        : null,
               ),
-            ),
-            const SizedBox(width: 16),
-            // Task Content
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    task.title,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color:
-                          task.isCompleted
-                              ? Colors.grey.shade400
-                              : const Color(0xFF2D3748),
-                      decoration:
-                          task.isCompleted ? TextDecoration.lineThrough : null,
-                    ),
-                  ),
-                  if (task.description.isNotEmpty) ...[
-                    const SizedBox(height: 4),
+              const SizedBox(width: 16),
+              // Task Content
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text(
-                      task.description,
+                      task.title,
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
                         color:
                             task.isCompleted
                                 ? Colors.grey.shade400
-                                : Colors.grey.shade600,
+                                : const Color(0xFF2D3748),
                         decoration:
                             task.isCompleted
                                 ? TextDecoration.lineThrough
                                 : null,
                       ),
                     ),
+                    if (task.description.isNotEmpty) ...[
+                      const SizedBox(height: 4),
+                      Text(
+                        task.description,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color:
+                              task.isCompleted
+                                  ? Colors.grey.shade400
+                                  : Colors.grey.shade600,
+                          decoration:
+                              task.isCompleted
+                                  ? TextDecoration.lineThrough
+                                  : null,
+                        ),
+                      ),
+                    ],
                   ],
-                ],
+                ),
               ),
-            ),
-            // Priority Badges
-            Row(children: _buildPriorityTags(task.priority)),
-          ],
+              // Priority Badges
+              Row(children: _buildPriorityTags(task.priority)),
+            ],
+          ),
         ),
       ),
     );
@@ -474,11 +431,22 @@ class HomeScreen extends ConsumerWidget {
     }
   }
 
-  Future<void> _showAddTaskDialog(BuildContext context, WidgetRef ref) async {
-    final titleController = TextEditingController();
-    final descriptionController = TextEditingController();
-    TaskPriority selectedPriority = TaskPriority.low;
-    DateTime selectedDate = DateTime.now();
+  Future<void> _showAddTaskDialog(
+    BuildContext context,
+    WidgetRef ref, [
+    Task? existingTask,
+  ]) async {
+    final titleController = TextEditingController(
+      text: existingTask?.title ?? '',
+    );
+    final descriptionController = TextEditingController(
+      text: existingTask?.description ?? '',
+    );
+    TaskPriority selectedPriority = existingTask?.priority ?? TaskPriority.low;
+    DateTime selectedDate = existingTask?.dueDate ?? DateTime.now();
+
+    // Create a state notifier for the selected date
+    ValueNotifier<DateTime> dateNotifier = ValueNotifier(selectedDate);
 
     showDialog(
       context: context,
@@ -487,7 +455,7 @@ class HomeScreen extends ConsumerWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
-            title: const Text('Add New Task'),
+            title: Text(existingTask != null ? 'Edit Task' : 'Add New Task'),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -531,19 +499,42 @@ class HomeScreen extends ConsumerWidget {
                   },
                 ),
                 const SizedBox(height: 16),
-                OutlinedButton(
-                  onPressed: () async {
-                    final date = await showDatePicker(
-                      context: context,
-                      initialDate: selectedDate,
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime.now().add(const Duration(days: 365)),
+                ValueListenableBuilder<DateTime>(
+                  valueListenable: dateNotifier,
+                  builder: (context, date, child) {
+                    return InputDecorator(
+                      decoration: const InputDecoration(
+                        labelText: 'Due Date',
+                        border: OutlineInputBorder(),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '${date.day}/${date.month}/${date.year}',
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.calendar_today),
+                            onPressed: () async {
+                              final newDate = await showDatePicker(
+                                context: context,
+                                initialDate: date,
+                                firstDate: DateTime.now(),
+                                lastDate: DateTime.now().add(
+                                  const Duration(days: 365),
+                                ),
+                              );
+                              if (newDate != null) {
+                                dateNotifier.value = newDate;
+                                selectedDate = newDate;
+                              }
+                            },
+                          ),
+                        ],
+                      ),
                     );
-                    if (date != null) {
-                      selectedDate = date;
-                    }
                   },
-                  child: const Text('Select Due Date'),
                 ),
               ],
             ),
@@ -555,18 +546,33 @@ class HomeScreen extends ConsumerWidget {
               ElevatedButton(
                 onPressed: () {
                   if (titleController.text.isNotEmpty) {
-                    ref
-                        .read(taskProvider.notifier)
-                        .addTask(
-                          titleController.text,
-                          descriptionController.text,
-                          selectedDate,
-                          selectedPriority,
-                        );
+                    if (existingTask != null) {
+                      // Update existing task
+                      final updatedTask = Task(
+                        id: existingTask.id,
+                        title: titleController.text,
+                        description: descriptionController.text,
+                        dueDate: selectedDate,
+                        priority: selectedPriority,
+                        isCompleted: existingTask.isCompleted,
+                        userId: existingTask.userId,
+                      );
+                      ref.read(taskProvider.notifier).updateTask(updatedTask);
+                    } else {
+                      // Add new task
+                      ref
+                          .read(taskProvider.notifier)
+                          .addTask(
+                            titleController.text,
+                            descriptionController.text,
+                            selectedDate,
+                            selectedPriority,
+                          );
+                    }
                     Navigator.pop(context);
                   }
                 },
-                child: const Text('Add'),
+                child: Text(existingTask != null ? 'Update' : 'Add'),
               ),
             ],
           ),
