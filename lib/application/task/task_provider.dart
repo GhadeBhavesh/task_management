@@ -26,7 +26,7 @@ class TaskNotifier extends StateNotifier<List<Task>> {
         .listen((snapshot) {
           state =
               snapshot.docs
-                  .map((doc) => Task.fromMap({'id': doc.id, ...doc.data()}))
+                  .map((doc) => Task.fromMap(doc.data(), doc.id))
                   .toList();
         });
   }
@@ -41,7 +41,7 @@ class TaskNotifier extends StateNotifier<List<Task>> {
     if (user == null) return;
 
     final task = Task(
-      id: DateTime.now().toString(),
+      id: '', // Firestore will generate the ID
       title: title,
       description: description,
       dueDate: dueDate,
@@ -49,7 +49,7 @@ class TaskNotifier extends StateNotifier<List<Task>> {
       userId: user.uid,
     );
 
-    await _firestore.collection('tasks').add(task.toMap());
+    await _firestore.collection('tasks').doc().set(task.toMap());
   }
 
   Future<void> updateTask(Task task) async {
@@ -61,15 +61,13 @@ class TaskNotifier extends StateNotifier<List<Task>> {
   }
 
   Future<void> toggleTaskCompletion(Task task) async {
-    final updatedTask = Task(
-      id: task.id,
-      title: task.title,
-      description: task.description,
-      dueDate: task.dueDate,
-      priority: task.priority,
-      isCompleted: !task.isCompleted,
-      userId: task.userId,
-    );
-    await updateTask(updatedTask);
+    try {
+      await _firestore.collection('tasks').doc(task.id).update({
+        'isCompleted': !task.isCompleted,
+      });
+    } catch (e) {
+      print('Error toggling task completion: $e');
+    }
+    // await updateTask(task);
   }
 }

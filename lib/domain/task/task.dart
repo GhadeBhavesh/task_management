@@ -21,7 +21,7 @@ class Task {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      // Remove ID from the map since Firestore handles it separately
       'title': title,
       'description': description,
       'dueDate': dueDate.toIso8601String(),
@@ -31,18 +31,18 @@ class Task {
     };
   }
 
-  factory Task.fromMap(Map<String, dynamic> map) {
+  factory Task.fromMap(Map<String, dynamic> map, String documentId) {
     return Task(
-      id: map['id'],
-      title: map['title'],
-      description: map['description'],
+      id: documentId, // Use the Firestore document ID
+      title: map['title'] ?? '',
+      description: map['description'] ?? '',
       dueDate: DateTime.parse(map['dueDate']),
       priority: TaskPriority.values.firstWhere(
         (e) => e.toString() == map['priority'],
         orElse: () => TaskPriority.low,
       ),
       isCompleted: map['isCompleted'] ?? false,
-      userId: map['userId'],
+      userId: map['userId'] ?? '',
     );
   }
 }
