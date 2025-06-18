@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:task_management/presentation/auth/login_screen.dart';
+import 'package:task_management/presentation/home/home_screen.dart';
 import 'application/auth/auth_provider.dart';
 import 'domain/auth/auth_state.dart';
 import 'firebase_options.dart';
@@ -31,7 +32,7 @@ class MyApp extends ConsumerWidget {
 
   Widget _buildHomeScreen(AuthState state) {
     if (state is AuthenticatedState) {
-      return const Scaffold(body: Center(child: Text('Logged in!')));
+      return const HomeScreen();
     } else if (state is LoadingAuthState) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     } else {
