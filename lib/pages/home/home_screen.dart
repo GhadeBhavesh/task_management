@@ -109,7 +109,7 @@ class HomeScreen extends ConsumerWidget {
                       ),
                     )
                     : ListView(
-                      padding: const EdgeInsets.fromLTRB(20, 25, 20, 20),
+                      padding: const EdgeInsets.fromLTRB(20, 25, 20, 100),
                       children: _buildGroupedTasks(tasks, ref, context),
                     ),
           ),
@@ -117,14 +117,67 @@ class HomeScreen extends ConsumerWidget {
       ),
       floatingActionButton: Container(
         decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 136, 140, 244),
           shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 8,
+              offset: Offset(0, 4),
+            ),
+          ],
         ),
+        margin: const EdgeInsets.only(top: 30),
+        width: 64,
+        height: 64,
         child: FloatingActionButton(
           onPressed: () => _showAddTaskDialog(context, ref),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          child: const Icon(Icons.add, color: Colors.white, size: 28),
+          elevation: 8,
+          backgroundColor: const Color.fromARGB(255, 136, 140, 244),
+          child: const Icon(Icons.add, size: 32, color: Colors.white),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.grey.shade200,
+        height: 80,
+        notchMargin: 8,
+        shape: const CircularNotchedRectangle(),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            // Left tab
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.only(right: 40),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(
+                      Icons.format_list_bulleted,
+                      color: Color.fromARGB(255, 136, 140, 244),
+                      size: 28,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            // Right tab
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.only(left: 40),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(
+                      Icons.calendar_today_outlined,
+                      color: Colors.grey.shade600,
+                      size: 28,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
