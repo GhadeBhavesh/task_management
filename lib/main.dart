@@ -2,9 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:task_management/presentation/auth/login_screen.dart';
-import 'package:task_management/presentation/home/home_screen.dart';
-import 'package:task_management/presentation/onboarding/onboarding_screen.dart';
+import 'package:task_management/pages/auth/login_screen.dart';
+import 'package:task_management/pages/home/home_screen.dart';
+import 'package:task_management/pages/onboarding/onboarding_screen.dart';
 import 'application/auth/auth_provider.dart';
 import 'domain/auth/auth_state.dart';
 import 'firebase_options.dart';
@@ -29,6 +29,7 @@ class MyApp extends ConsumerWidget {
     final authState = ref.watch(authProvider);
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Task Management',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
