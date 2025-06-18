@@ -25,7 +25,6 @@ class HomeScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Top Row with Menu and More Options
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -63,10 +62,13 @@ class HomeScreen extends ConsumerWidget {
                             color: Colors.white.withOpacity(0.15),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: const Icon(
-                            Icons.more_horiz,
-                            color: Colors.white,
-                            size: 20,
+                          child: GestureDetector(
+                            onTap: () => _showFilterDialog(context, ref),
+                            child: const Icon(
+                              Icons.filter_list,
+                              color: Colors.white,
+                              size: 20,
+                            ),
                           ),
                         ),
                       ],
@@ -162,9 +164,13 @@ class HomeScreen extends ConsumerWidget {
     WidgetRef ref,
     BuildContext context,
   ) {
+    // Sort tasks by due date
+    final sortedTasks = List<Task>.from(tasks)
+      ..sort((a, b) => a.dueDate.compareTo(b.dueDate));
+
     final Map<String, List<Task>> groupedTasks = {};
 
-    for (final task in tasks) {
+    for (final task in sortedTasks) {
       final dateKey = _getDateKey(task.dueDate);
       if (!groupedTasks.containsKey(dateKey)) {
         groupedTasks[dateKey] = [];
@@ -172,9 +178,21 @@ class HomeScreen extends ConsumerWidget {
       groupedTasks[dateKey]!.add(task);
     }
 
+    // Sort the date keys
+    final sortedKeys =
+        groupedTasks.keys.toList()..sort((a, b) {
+          if (a == 'Today') return -1;
+          if (b == 'Today') return 1;
+          if (a == 'Tomorrow') return -1;
+          if (b == 'Tomorrow') return 1;
+          if (a == 'This week') return -1;
+          if (b == 'This week') return 1;
+          return a.compareTo(b);
+        });
+
     final List<Widget> widgets = [];
 
-    groupedTasks.forEach((dateKey, taskList) {
+    for (final dateKey in sortedKeys) {
       widgets.add(
         Padding(
           padding: const EdgeInsets.only(bottom: 15, top: 10),
@@ -189,12 +207,12 @@ class HomeScreen extends ConsumerWidget {
         ),
       );
 
-      for (final task in taskList) {
+      for (final task in groupedTasks[dateKey]!) {
         widgets.add(_buildTaskCard(task, ref, context));
       }
 
       widgets.add(const SizedBox(height: 15));
-    });
+    }
 
     return widgets;
   }
@@ -215,6 +233,24 @@ class HomeScreen extends ConsumerWidget {
     } else {
       return '${date.day}/${date.month}/${date.year}';
     }
+  }
+
+  String _formatDate(DateTime date) {
+    final months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+    return '${date.day} ${months[date.month - 1]}';
   }
 
   Widget _buildTaskCard(Task task, WidgetRef ref, BuildContext context) {
@@ -286,7 +322,7 @@ class HomeScreen extends ConsumerWidget {
         onTap: () => _showAddTaskDialog(context, ref, task),
         child: Container(
           margin: const EdgeInsets.only(bottom: 12),
-          padding: const EdgeInsets.all(18),
+          padding: const EdgeInsets.fromLTRB(18, 18, 18, 8),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
@@ -298,84 +334,92 @@ class HomeScreen extends ConsumerWidget {
               ),
             ],
           ),
-          child: Row(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Checkbox
-              GestureDetector(
-                onTap:
-                    () => ref
-                        .read(taskProvider.notifier)
-                        .toggleTaskCompletion(task),
-                child: Container(
-                  width: 24,
-                  height: 24,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color:
-                          task.isCompleted
-                              ? _getPriorityColor(task.priority)
-                              : Colors.grey.shade300,
-                      width: 2,
-                    ),
-                    color:
-                        task.isCompleted
-                            ? _getPriorityColor(task.priority)
-                            : Colors.transparent,
-                  ),
-                  child:
-                      task.isCompleted
-                          ? const Icon(
-                            Icons.check,
-                            size: 14,
-                            color: Colors.white,
-                          )
-                          : null,
-                ),
-              ),
-              const SizedBox(width: 16),
-              // Task Content
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      task.title,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color:
-                            task.isCompleted
-                                ? Colors.grey.shade400
-                                : const Color(0xFF2D3748),
-                        decoration:
-                            task.isCompleted
-                                ? TextDecoration.lineThrough
-                                : null,
-                      ),
-                    ),
-                    if (task.description.isNotEmpty) ...[
-                      const SizedBox(height: 4),
-                      Text(
-                        task.description,
-                        style: TextStyle(
-                          fontSize: 14,
+              Row(
+                children: [
+                  // Checkbox
+                  GestureDetector(
+                    onTap:
+                        () => ref
+                            .read(taskProvider.notifier)
+                            .toggleTaskCompletion(task),
+                    child: Container(
+                      width: 24,
+                      height: 24,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
                           color:
                               task.isCompleted
-                                  ? Colors.grey.shade400
-                                  : Colors.grey.shade600,
-                          decoration:
-                              task.isCompleted
-                                  ? TextDecoration.lineThrough
-                                  : null,
+                                  ? _getPriorityColor(task.priority)
+                                  : Colors.grey.shade300,
+                          width: 2,
                         ),
+                        color:
+                            task.isCompleted
+                                ? _getPriorityColor(task.priority)
+                                : Colors.transparent,
                       ),
-                    ],
-                  ],
+                      child:
+                          task.isCompleted
+                              ? const Icon(
+                                Icons.check,
+                                size: 14,
+                                color: Colors.white,
+                              )
+                              : null,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  // Task Content
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          task.title,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color:
+                                task.isCompleted
+                                    ? Colors.grey.shade400
+                                    : const Color(0xFF2D3748),
+                            decoration:
+                                task.isCompleted
+                                    ? TextDecoration.lineThrough
+                                    : null,
+                          ),
+                        ),
+
+                        // const SizedBox(height: 4),
+                      ],
+                    ),
+                  ),
+                  // Priority Badges
+                  Row(children: _buildPriorityTags(task.priority)),
+                ],
+              ),
+              // SizedBox(width: 20),
+              Padding(
+                padding: const EdgeInsets.only(left: 38.0),
+                child: Text(
+                  _formatDate(task.dueDate),
+                  style: TextStyle(
+                    fontSize: 14,
+                    color:
+                        task.isCompleted
+                            ? Colors.grey.shade400
+                            : Colors.grey.shade600,
+                    decoration:
+                        task.isCompleted ? TextDecoration.lineThrough : null,
+                  ),
                 ),
               ),
-              // Priority Badges
-              Row(children: _buildPriorityTags(task.priority)),
             ],
           ),
         ),
