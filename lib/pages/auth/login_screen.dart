@@ -82,11 +82,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             color: const Color(0xFF6366F1),
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          child: const Icon(
-                            Icons.check,
+                          child: Image.asset(
+                            'assets/images/correct.png',
+                            width: 50,
+                            height: 50,
                             color: Colors.white,
-                            size: 50,
-                            weight: 900,
                           ),
                         ),
                         Positioned(
@@ -97,6 +97,30 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             height: 12,
                             decoration: const BoxDecoration(
                               color: Colors.yellow,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 10,
+                          right: 10,
+                          child: Container(
+                            width: 6,
+                            height: 6,
+                            decoration: const BoxDecoration(
+                              color: Colors.orange,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 20,
+                          left: -5,
+                          child: Container(
+                            width: 6,
+                            height: 6,
+                            decoration: const BoxDecoration(
+                              color: Colors.orange,
                               shape: BoxShape.circle,
                             ),
                           ),

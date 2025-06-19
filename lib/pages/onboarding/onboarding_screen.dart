@@ -234,21 +234,24 @@ class OnboardingPage extends StatelessWidget {
             clipBehavior: Clip.none,
             children: [
               // Main icon container
-              Container(
-                width: 120,
-                height: 120,
-                decoration: BoxDecoration(
-                  color: backgroundColor,
-                  borderRadius: BorderRadius.circular(24),
-                  boxShadow: [
-                    BoxShadow(
-                      color: backgroundColor.withOpacity(0.3),
-                      blurRadius: 20,
-                      offset: const Offset(0, 10),
-                    ),
-                  ],
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Container(
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    color: backgroundColor,
+                    borderRadius: BorderRadius.circular(24),
+                    boxShadow: [
+                      BoxShadow(
+                        color: backgroundColor.withOpacity(0.3),
+                        blurRadius: 20,
+                        offset: const Offset(0, 10),
+                      ),
+                    ],
+                  ),
+                  child: Icon(image, size: 48, color: Colors.white),
                 ),
-                child: Icon(image, size: 48, color: Colors.white),
               ),
               // Decorative dots
               Positioned(
@@ -276,8 +279,8 @@ class OnboardingPage extends StatelessWidget {
                 ),
               ),
               Positioned(
-                bottom: -8,
-                left: -20,
+                bottom: -12,
+                left: 30,
                 child: Container(
                   width: 8,
                   height: 8,

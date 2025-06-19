@@ -80,11 +80,11 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                             color: const Color(0xFF6366F1),
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          child: const Icon(
-                            Icons.check,
+                          child: Image.asset(
+                            'assets/images/correct.png',
+                            width: 50,
+                            height: 50,
                             color: Colors.white,
-                            size: 50,
-                            weight: 900,
                           ),
                         ),
                         Positioned(
