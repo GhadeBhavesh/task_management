@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:task_management/pages/task/task_detail_screen.dart';
 import '../../application/task/task_provider.dart';
 import '../../domain/model/task.dart';
+// import 'task_detail_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -186,20 +188,20 @@ class HomeScreen extends ConsumerWidget {
       floatingActionButton: Container(
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              blurRadius: 8,
-              offset: Offset(0, 4),
-            ),
-          ],
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Color.fromARGB(66, 71, 71, 71),
+          //     blurRadius: 2,
+          //     offset: Offset(0, 4),
+          //   ),
+          // ],
         ),
         margin: const EdgeInsets.only(top: 30),
         width: 64,
         height: 64,
         child: FloatingActionButton(
           onPressed: () => _showAddTaskDialog(context, ref),
-          elevation: 0, // Remove elevation since we have custom shadow
+          elevation: 4, // Remove elevation since we have custom shadow
           backgroundColor: const Color.fromARGB(255, 136, 140, 244),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(32.0)),
@@ -443,7 +445,14 @@ class HomeScreen extends ConsumerWidget {
         );
       },
       child: GestureDetector(
-        onTap: () => _showAddTaskDialog(context, ref, task),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => TaskDetailScreen(task: task),
+            ),
+          );
+        },
         child: Container(
           margin: const EdgeInsets.only(bottom: 12),
           padding: const EdgeInsets.fromLTRB(18, 18, 18, 8),
@@ -506,6 +515,8 @@ class HomeScreen extends ConsumerWidget {
                       children: [
                         Text(
                           task.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,

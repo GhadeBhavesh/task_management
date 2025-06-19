@@ -82,11 +82,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             color: const Color(0xFF6366F1),
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          child: Image.asset(
-                            'assets/images/correct.png',
-                            width: 50,
-                            height: 50,
+                          child: const Icon(
+                            Icons.check,
                             color: Colors.white,
+                            size: 50,
+                            weight: 900,
                           ),
                         ),
                         Positioned(
@@ -185,17 +185,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           decoration: InputDecoration(
                             hintText: '',
                             filled: true,
-                            fillColor: Color.fromARGB(255, 245, 247, 254),
+                            fillColor: Colors.grey[50],
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(24),
+                              borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(color: Colors.grey[300]!),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(24),
+                              borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(color: Colors.grey[300]!),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(24),
+                              borderRadius: BorderRadius.circular(12),
                               borderSide: const BorderSide(
                                 color: Color(0xFF6366F1),
                               ),
@@ -240,17 +240,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           decoration: InputDecoration(
                             hintText: '',
                             filled: true,
-                            fillColor: Color.fromARGB(255, 245, 247, 254),
+                            fillColor: Colors.grey[50],
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(24),
+                              borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(color: Colors.grey[300]!),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(24),
+                              borderRadius: BorderRadius.circular(12),
                               borderSide: BorderSide(color: Colors.grey[300]!),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(24),
+                              borderRadius: BorderRadius.circular(12),
                               borderSide: const BorderSide(
                                 color: Color(0xFF6366F1),
                               ),
@@ -409,10 +409,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       width: 80,
       height: 80,
       decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(60),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.grey[300]!),
       ),
-      child: Icon(icon, color: Colors.white, size: 35),
+      child: Icon(icon, color: color, size: 24),
     );
   }
 }
@@ -506,5 +507,4 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 //       ),
 //     );
 //   }
-// }
 // }
