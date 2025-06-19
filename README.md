@@ -1,7 +1,7 @@
 # task_management
 
 A new Flutter project.
-![Image](https://github.com/user-attachments/assets/fa901884-2326-405d-9941-99c9f6801b58)
+![image](https://github.com/user-attachments/assets/8af4c3bc-f2e4-4285-85ed-d2c996710c14)
 ![Image](https://github.com/user-attachments/assets/0b941fab-91ef-47ef-856e-355d5ea4428b)
 ![Image](https://github.com/user-attachments/assets/4923907a-10c4-4357-b7a1-95057cfd3e49)
 ![Image](https://github.com/user-attachments/assets/499728eb-31bf-4bd7-872e-5fd26cd36dea)
