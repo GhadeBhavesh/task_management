@@ -620,34 +620,84 @@ class HomeScreen extends ConsumerWidget {
       context: context,
       builder:
           (context) => AlertDialog(
+            backgroundColor: Colors.white,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(24),
             ),
-            title: Text(existingTask != null ? 'Edit Task' : 'Add New Task'),
+            title: Text(
+              existingTask != null ? 'Edit Task' : 'Add New Task',
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF2D3748),
+              ),
+            ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
                   controller: titleController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Title',
-                    border: OutlineInputBorder(),
+                    labelStyle: TextStyle(color: Colors.grey[600]),
+                    filled: true,
+                    fillColor: const Color.fromARGB(255, 245, 247, 254),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(color: Color(0xFF6366F1)),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: descriptionController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Description',
-                    border: OutlineInputBorder(),
+                    labelStyle: TextStyle(color: Colors.grey[600]),
+                    filled: true,
+                    fillColor: const Color.fromARGB(255, 245, 247, 254),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(color: Color(0xFF6366F1)),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 DropdownButtonFormField<TaskPriority>(
                   value: selectedPriority,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Priority',
-                    border: OutlineInputBorder(),
+                    labelStyle: TextStyle(color: Colors.grey[600]),
+                    filled: true,
+                    fillColor: const Color.fromARGB(255, 245, 247, 254),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(color: Color(0xFF6366F1)),
+                    ),
                   ),
                   items:
                       TaskPriority.values
@@ -671,9 +721,25 @@ class HomeScreen extends ConsumerWidget {
                   valueListenable: dateNotifier,
                   builder: (context, date, child) {
                     return InputDecorator(
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'Due Date',
-                        border: OutlineInputBorder(),
+                        labelStyle: TextStyle(color: Colors.grey[600]),
+                        filled: true,
+                        fillColor: const Color.fromARGB(255, 245, 247, 254),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: BorderSide.none,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: const BorderSide(
+                            color: Color(0xFF6366F1),
+                          ),
+                        ),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -709,6 +775,7 @@ class HomeScreen extends ConsumerWidget {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
+                style: TextButton.styleFrom(foregroundColor: Colors.grey[600]),
                 child: const Text('Cancel'),
               ),
               ElevatedButton(
@@ -740,9 +807,22 @@ class HomeScreen extends ConsumerWidget {
                     Navigator.pop(context);
                   }
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF6366F1),
+                  foregroundColor: Colors.white,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
+                ),
                 child: Text(existingTask != null ? 'Update' : 'Add'),
               ),
             ],
+            actionsPadding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
           ),
     );
   }
@@ -756,18 +836,40 @@ class HomeScreen extends ConsumerWidget {
       context: context,
       builder:
           (context) => AlertDialog(
+            backgroundColor: Colors.white,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(24),
             ),
-            title: const Text('Filter Tasks'),
+            title: const Text(
+              'Filter Tasks',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF2D3748),
+              ),
+            ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 DropdownButtonFormField<TaskPriority>(
                   value: selectedPriority,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Priority',
-                    border: OutlineInputBorder(),
+                    labelStyle: TextStyle(color: Colors.grey[600]),
+                    filled: true,
+                    fillColor: const Color.fromARGB(255, 245, 247, 254),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(color: Color(0xFF6366F1)),
+                    ),
                   ),
                   items: [
                     const DropdownMenuItem(
@@ -786,9 +888,23 @@ class HomeScreen extends ConsumerWidget {
                 const SizedBox(height: 16),
                 DropdownButtonFormField<bool>(
                   value: selectedStatus,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Status',
-                    border: OutlineInputBorder(),
+                    labelStyle: TextStyle(color: Colors.grey[600]),
+                    filled: true,
+                    fillColor: const Color.fromARGB(255, 245, 247, 254),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(color: Color(0xFF6366F1)),
+                    ),
                   ),
                   items: const [
                     DropdownMenuItem(value: null, child: Text('All Status')),
@@ -798,26 +914,35 @@ class HomeScreen extends ConsumerWidget {
                   onChanged: (value) => selectedStatus = value,
                 ),
                 const SizedBox(height: 16),
-                ListTile(
-                  title: const Text('Due Date'),
-                  subtitle:
-                      selectedDate != null
-                          ? Text(
-                            '${selectedDate?.day}/${selectedDate?.month}/${selectedDate?.year}',
-                          )
-                          : const Text('Select Date'),
-                  trailing: const Icon(Icons.calendar_today),
-                  onTap: () async {
-                    final date = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime(2100),
-                    );
-                    if (date != null) {
-                      selectedDate = date;
-                    }
-                  },
+                Container(
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 245, 247, 254),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: ListTile(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    title: const Text('Due Date'),
+                    subtitle:
+                        selectedDate != null
+                            ? Text(
+                              '${selectedDate?.day}/${selectedDate?.month}/${selectedDate?.year}',
+                            )
+                            : const Text('Select Date'),
+                    trailing: const Icon(Icons.calendar_today),
+                    onTap: () async {
+                      final date = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2100),
+                      );
+                      if (date != null) {
+                        selectedDate = date;
+                      }
+                    },
+                  ),
                 ),
               ],
             ),
@@ -827,6 +952,7 @@ class HomeScreen extends ConsumerWidget {
                   ref.read(taskProvider.notifier).clearFilters();
                   Navigator.pop(context);
                 },
+                style: TextButton.styleFrom(foregroundColor: Colors.grey[600]),
                 child: const Text('Clear Filters'),
               ),
               ElevatedButton(
@@ -840,9 +966,22 @@ class HomeScreen extends ConsumerWidget {
                       );
                   Navigator.pop(context);
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF6366F1),
+                  foregroundColor: Colors.white,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
+                ),
                 child: const Text('Apply'),
               ),
             ],
+            actionsPadding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
           ),
     );
   }
