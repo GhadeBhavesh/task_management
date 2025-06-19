@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:task_management/pages/task/task_detail_screen.dart';
-import '../../application/task/task_provider.dart';
-import '../../domain/model/task.dart';
+import '../../provider/task/task_provider.dart';
+import '../../auth/model/task.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -15,7 +15,6 @@ class HomeScreen extends ConsumerWidget {
       backgroundColor: Colors.grey.shade100,
       body: Column(
         children: [
-          // Custom Header with Purple Gradient
           Container(
             decoration: const BoxDecoration(
               color: Color.fromARGB(255, 136, 140, 244),
@@ -26,19 +25,17 @@ class HomeScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // SizedBox containing the Stack with background circle and content
                     SizedBox(
                       width: double.infinity,
-                      height: 130, // Increased height to accommodate the icons
+                      height: 130,
                       child: Stack(
                         children: [
-                          // White circle background - moved up and made larger
                           Positioned(
                             left: -55,
-                            top: 0, // Moved up to be behind the icons
+                            top: 0,
                             child: Container(
-                              width: 200, // Made wider
-                              height: 200, // Made taller
+                              width: 200,
+                              height: 200,
                               decoration: BoxDecoration(
                                 color: Colors.white.withOpacity(0.25),
                                 shape: BoxShape.circle,
@@ -70,10 +67,7 @@ class HomeScreen extends ConsumerWidget {
                                       10,
                                       10,
                                     ),
-                                    // decoration: BoxDecoration(
-                                    //   color: Colors.white.withOpacity(0.15),
-                                    //   borderRadius: BorderRadius.circular(12),
-                                    // ),
+
                                     child: const Icon(
                                       Icons.apps,
                                       color: Colors.white,
@@ -99,15 +93,6 @@ class HomeScreen extends ConsumerWidget {
                                           size: 20,
                                         ),
                                         const SizedBox(width: 8),
-                                        // const Expanded(
-                                        //   child: Text(
-                                        //     'Search...',
-                                        //     style: TextStyle(
-                                        //       color: Colors.grey,
-                                        //       fontSize: 14,
-                                        //     ),
-                                        //   ),
-                                        // ),
                                       ],
                                     ),
                                   ),

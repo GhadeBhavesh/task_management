@@ -5,8 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:task_management/pages/auth/login_screen.dart';
 import 'package:task_management/pages/home/home_screen.dart';
 import 'package:task_management/pages/onboarding/onboarding_screen.dart';
-import 'application/auth/auth_provider.dart';
-import 'domain/auth/auth_state.dart';
+import 'provider/auth/auth_provider.dart';
+import 'auth/auth/auth_state.dart';
 import 'firebase_options.dart';
 
 void main() async {

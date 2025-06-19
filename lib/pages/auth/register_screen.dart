@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../application/auth/auth_provider.dart';
-import '../../domain/auth/auth_state.dart';
+import '../../provider/auth/auth_provider.dart';
+import '../../auth/auth/auth_state.dart';
 import '../home/home_screen.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {

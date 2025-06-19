@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:task_management/domain/auth/auth_state.dart';
-import '../../application/auth/auth_provider.dart';
+import 'package:task_management/auth/auth/auth_state.dart';
+import '../../provider/auth/auth_provider.dart';
 import 'register_screen.dart';
 import '../home/home_screen.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../domain/model/task.dart';
-import '../../application/task/task_provider.dart';
+import '../../auth/model/task.dart';
+import '../../provider/task/task_provider.dart';
 
 class TaskDetailScreen extends ConsumerStatefulWidget {
   final Task task;
