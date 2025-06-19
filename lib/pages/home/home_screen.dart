@@ -25,71 +25,19 @@ class HomeScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.15),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: const Icon(
-                              Icons.apps,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ),
-                          // Search Bar
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 70,
-                              vertical: 8,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            child: Icon(
-                              Icons.search,
-                              color: Colors.grey.shade600,
-                              size: 20,
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.15),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: GestureDetector(
-                              onTap: () => _showFilterDialog(context, ref),
-                              child: const Icon(
-                                Icons.filter_list,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    // Date and Title
+                    // SizedBox containing the Stack with background circle and content
                     SizedBox(
                       width: double.infinity,
-                      height: 100,
+                      height: 130, // Increased height to accommodate the icons
                       child: Stack(
                         children: [
-                          // White circle background
+                          // White circle background - moved up and made larger
                           Positioned(
                             left: -55,
-                            bottom: -30,
+                            top: 0, // Moved up to be behind the icons
                             child: Container(
-                              width: 200,
-                              height: 150,
+                              width: 200, // Made wider
+                              height: 200, // Made taller
                               decoration: BoxDecoration(
                                 color: Colors.white.withOpacity(0.25),
                                 shape: BoxShape.circle,
@@ -103,10 +51,89 @@ class HomeScreen extends ConsumerWidget {
                               ),
                             ),
                           ),
-                          // Text positioned above the circle
+                          // Top navigation row repositioned
+                          Positioned(
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.fromLTRB(
+                                      10,
+                                      10,
+                                      10,
+                                      10,
+                                    ),
+                                    // decoration: BoxDecoration(
+                                    //   color: Colors.white.withOpacity(0.15),
+                                    //   borderRadius: BorderRadius.circular(12),
+                                    // ),
+                                    child: const Icon(
+                                      Icons.apps,
+                                      color: Colors.white,
+                                      size: 25,
+                                    ),
+                                  ),
+                                  // Search Bar
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                      vertical: 8,
+                                    ),
+                                    width: 200,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.search,
+                                          color: Colors.grey.shade600,
+                                          size: 20,
+                                        ),
+                                        const SizedBox(width: 8),
+                                        // const Expanded(
+                                        //   child: Text(
+                                        //     'Search...',
+                                        //     style: TextStyle(
+                                        //       color: Colors.grey,
+                                        //       fontSize: 14,
+                                        //     ),
+                                        //   ),
+                                        // ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.15),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: GestureDetector(
+                                      onTap:
+                                          () => _showFilterDialog(context, ref),
+                                      child: const Icon(
+                                        Icons.filter_list,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          // Text positioned at the bottom
                           Positioned(
                             left: 20,
-                            bottom: 5,
+                            bottom: 10,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
