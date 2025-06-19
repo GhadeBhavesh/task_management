@@ -1,15 +1,20 @@
 # task_management
 
-A new Flutter project.
+
 ![image](https://github.com/user-attachments/assets/8af4c3bc-f2e4-4285-85ed-d2c996710c14)
-![Image](https://github.com/user-attachments/assets/0b941fab-91ef-47ef-856e-355d5ea4428b)
-![Image](https://github.com/user-attachments/assets/4923907a-10c4-4357-b7a1-95057cfd3e49)
-![Image](https://github.com/user-attachments/assets/499728eb-31bf-4bd7-872e-5fd26cd36dea)
-![Image](https://github.com/user-attachments/assets/0a777cef-659f-487d-a9f1-9342d67fe35d)
-![Image](https://github.com/user-attachments/assets/fb4a2b0c-0ffb-4260-846f-7b73a49237dd)
-![Image](https://github.com/user-attachments/assets/9deb9e34-c4ea-41e7-8f73-e1b24c09442d)
-![Image](https://github.com/user-attachments/assets/008e61bf-1cfd-44df-b77c-516d87fa0e7c)
-![Image](https://github.com/user-attachments/assets/293353b5-ecaa-48c3-9c79-ec4e9dbd45fa)
+![image](https://github.com/user-attachments/assets/1ad0fccf-8bec-4450-8072-b71c811049d0)
+![image](https://github.com/user-attachments/assets/c5e2fb99-6215-4a24-810b-fe8011e48266)
+![image](https://github.com/user-attachments/assets/3255991d-0949-4ef4-b186-ac7e534add01)
+![image](https://github.com/user-attachments/assets/c02329db-7f9a-472f-82fd-d80c97a7e3a2)
+![image](https://github.com/user-attachments/assets/75c340a9-330f-428d-a136-48e09f450a3f)
+![image](https://github.com/user-attachments/assets/b3f8b8af-abf3-4317-8d1d-372ec6be2c07)
+![image](https://github.com/user-attachments/assets/8fd512b3-6eb0-4242-a689-ed6238525baf)
+![image](https://github.com/user-attachments/assets/cbce4296-9d3d-484e-b2b1-b0a4a8a65697)
+
+
+
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
