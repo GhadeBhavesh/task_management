@@ -11,7 +11,7 @@ class HomeScreen extends ConsumerWidget {
     final tasks = ref.watch(taskProvider);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FA),
+      backgroundColor: Colors.grey.shade100,
       body: Column(
         children: [
           // Custom Header with Purple Gradient
@@ -21,100 +21,117 @@ class HomeScreen extends ConsumerWidget {
             ),
             child: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                padding: const EdgeInsets.fromLTRB(0, 10, 20, 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.15),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: const Icon(
-                            Icons.apps,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                        ),
-                        // Search Bar
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 70,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          child: Icon(
-                            Icons.search,
-                            color: Colors.grey.shade600,
-                            size: 20,
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.15),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: GestureDetector(
-                            onTap: () => _showFilterDialog(context, ref),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.15),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                             child: const Icon(
-                              Icons.filter_list,
+                              Icons.apps,
                               color: Colors.white,
                               size: 20,
                             ),
                           ),
-                        ),
-                      ],
+                          // Search Bar
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 70,
+                              vertical: 8,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            child: Icon(
+                              Icons.search,
+                              color: Colors.grey.shade600,
+                              size: 20,
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.15),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: GestureDetector(
+                              onTap: () => _showFilterDialog(context, ref),
+                              child: const Icon(
+                                Icons.filter_list,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    const SizedBox(height: 25),
 
                     // Date and Title
-                    Center(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 18,
-                          horizontal: 36,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.04),
-                              blurRadius: 10,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              _getCurrentDateString(),
-                              style: const TextStyle(
-                                color: Colors.grey,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
+                    SizedBox(
+                      width: double.infinity,
+                      height: 100,
+                      child: Stack(
+                        children: [
+                          // White circle background
+                          Positioned(
+                            left: -55,
+                            bottom: -30,
+                            child: Container(
+                              width: 200,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.25),
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.04),
+                                    blurRadius: 60,
+                                    offset: const Offset(0, 1),
+                                  ),
+                                ],
                               ),
                             ),
-                            const SizedBox(height: 8),
-                            const Text(
-                              'My tasks',
-                              style: TextStyle(
-                                color: Color(0xFF2D3748),
-                                fontSize: 32,
-                                fontWeight: FontWeight.w600,
-                              ),
+                          ),
+                          // Text positioned above the circle
+                          Positioned(
+                            left: 20,
+                            bottom: 5,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  _getCurrentDateString(),
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+
+                                const Text(
+                                  'My tasks',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -165,7 +182,7 @@ class HomeScreen extends ConsumerWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-        color: Color(0xFFF8F9FA),
+        color: Colors.white,
         height: 80,
         notchMargin: 8,
         shape: const CircularNotchedRectangle(),
