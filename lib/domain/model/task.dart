@@ -21,7 +21,6 @@ class Task {
 
   Map<String, dynamic> toMap() {
     return {
-      // Remove ID from the map since Firestore handles it separately
       'title': title,
       'description': description,
       'dueDate': dueDate.toIso8601String(),

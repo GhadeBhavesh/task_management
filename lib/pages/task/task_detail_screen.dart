@@ -205,17 +205,6 @@ class _TaskDetailScreenState extends ConsumerState<TaskDetailScreen> {
     return '${date.day} ${months[date.month - 1]}';
   }
 
-  Color _getPriorityColor(TaskPriority priority) {
-    switch (priority) {
-      case TaskPriority.high:
-        return const Color(0xFFFF6B6B);
-      case TaskPriority.medium:
-        return const Color(0xFFFFB347);
-      case TaskPriority.low:
-        return const Color(0xFF51CF66);
-    }
-  }
-
   List<Widget> _buildPriorityTags(TaskPriority priority) {
     switch (priority) {
       case TaskPriority.high:
@@ -438,11 +427,7 @@ class _TaskDetailScreenState extends ConsumerState<TaskDetailScreen> {
                       isCompleted: task.isCompleted,
                       userId: task.userId,
                     );
-
-                    // Close dialog first
                     Navigator.pop(context);
-
-                    // Update state and return to previous screen
                     if (mounted) {
                       ref.read(taskProvider.notifier).updateTask(updatedTask);
                       Navigator.pop(context); // Return to home screen

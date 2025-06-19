@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:task_management/pages/task/task_detail_screen.dart';
 import '../../application/task/task_provider.dart';
 import '../../domain/model/task.dart';
-// import 'task_detail_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -186,22 +185,13 @@ class HomeScreen extends ConsumerWidget {
         ],
       ),
       floatingActionButton: Container(
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: Color.fromARGB(66, 71, 71, 71),
-          //     blurRadius: 2,
-          //     offset: Offset(0, 4),
-          //   ),
-          // ],
-        ),
+        decoration: const BoxDecoration(shape: BoxShape.circle),
         margin: const EdgeInsets.only(top: 30),
         width: 64,
         height: 64,
         child: FloatingActionButton(
           onPressed: () => _showAddTaskDialog(context, ref),
-          elevation: 4, // Remove elevation since we have custom shadow
+          elevation: 4,
           backgroundColor: const Color.fromARGB(255, 136, 140, 244),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(32.0)),

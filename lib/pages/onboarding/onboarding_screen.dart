@@ -1,4 +1,3 @@
-// onboarding_screen.dart
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../auth/login_screen.dart';
@@ -77,7 +76,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
             ),
-            // Navigation Button - Half circle design
+
             if (_currentPage == _pages.length - 1)
               // Get Started Button
               Padding(
@@ -173,40 +172,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 }
 
-// Custom painter for the stylized arrow
-class ArrowPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint =
-        Paint()
-          ..color = Colors.white
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 2.5
-          ..strokeCap = StrokeCap.round
-          ..strokeJoin = StrokeJoin.round;
-
-    final path = Path();
-
-    // Calculate center position
-    final centerX = size.width / 2;
-    final centerY = size.height / 2;
-
-    // Draw arrow shaft (horizontal line)
-    path.moveTo(centerX - 8, centerY);
-    path.lineTo(centerX + 6, centerY);
-
-    // Draw arrow head (two lines forming the point)
-    path.moveTo(centerX + 2, centerY - 4);
-    path.lineTo(centerX + 6, centerY);
-    path.lineTo(centerX + 2, centerY + 4);
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
-}
-
 class OnboardingPage extends StatelessWidget {
   final String title;
   final String description;
@@ -297,7 +262,7 @@ class OnboardingPage extends StatelessWidget {
                   width: 4,
                   height: 4,
                   decoration: const BoxDecoration(
-                    color: Color(0xFFE5E7EB), // Changed from Colors.grey[400]
+                    color: Color(0xFFE5E7EB),
                     shape: BoxShape.circle,
                   ),
                 ),

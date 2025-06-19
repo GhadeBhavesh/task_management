@@ -44,13 +44,3 @@ class MyApp extends ConsumerWidget {
     );
   }
 }
-
-Widget _buildHomeScreen(AuthState state) {
-  if (state is AuthenticatedState) {
-    return const HomeScreen();
-  } else if (state is LoadingAuthState) {
-    return const Scaffold(body: Center(child: CircularProgressIndicator()));
-  } else {
-    return const LoginScreen();
-  }
-}
