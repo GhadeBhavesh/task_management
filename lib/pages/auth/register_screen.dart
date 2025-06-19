@@ -170,17 +170,17 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           controller: _emailController,
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.grey[50],
+                            fillColor: Color.fromARGB(255, 245, 247, 254),
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(24),
                               borderSide: BorderSide(color: Colors.grey[300]!),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(24),
                               borderSide: BorderSide(color: Colors.grey[300]!),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(24),
                               borderSide: const BorderSide(
                                 color: Color(0xFF6366F1),
                               ),
@@ -219,17 +219,17 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           obscureText: !_isPasswordVisible,
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.grey[50],
+                            fillColor: Color.fromARGB(255, 245, 247, 254),
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(24),
                               borderSide: BorderSide(color: Colors.grey[300]!),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(24),
                               borderSide: BorderSide(color: Colors.grey[300]!),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(24),
                               borderSide: const BorderSide(
                                 color: Color(0xFF6366F1),
                               ),
@@ -367,11 +367,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       width: 80,
       height: 80,
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey[300]!),
+        color: color,
+        borderRadius: BorderRadius.circular(60),
       ),
-      child: Icon(icon, color: color, size: 24),
+      child: Icon(icon, color: Colors.white, size: 35),
     );
   }
 }
@@ -452,4 +451,5 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 //       ),
 //     );
 //   }
+// }
 // }
